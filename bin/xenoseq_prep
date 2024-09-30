@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cores=4
+assembler="megahit"
+assembler_tmp="tmp"
 
 SCRIPT_PATH=`dirname "$0"`; SCRIPT_PATH=`eval "cd \"$SCRIPT_PATH\" && pwd"`
 source $SCRIPT_PATH/xenoseq_functions; 		# Simple custom-made functions to manipulate fasta files
@@ -77,7 +79,7 @@ else
 	        megahit -r $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/megahit.log
 	        success $? "Megahit"
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
-        else if [[ "$asembler" == "penguin" ]]; then
+        else if [[ "$asembler" == "penguin" ]]
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Using penguin to assemble reads"
 	        penguin $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/megahit.log
 	        success $? "Penguin"
