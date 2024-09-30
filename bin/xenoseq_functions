@@ -90,7 +90,7 @@ function assemble_penguin() {
 		echo -e "[xenoseq_penguin     $(date +%d-%m_%H:%M:%S)] ${ORANGE}NOTE: no job created, using pre-existing $out/final.contigs.fa${NC}"
 	else
 		rm -rf $out
-		command=" $reads $out $tmp --threads $cores --min-contig-len $minlen "
+		command="penguin guided_nuclassemble $reads $out $tmp --threads $cores --min-contig-len $minlen "
 		echo -e "[xenoseq_cmd      $(date +%d-%m_%H:%M:%S)] ${GREY}$command${NC}"
 		$command 2>> ${output}/${query_samples[$i]}/logs/penguin.log
 		success $? "Assembly (penguin)"
