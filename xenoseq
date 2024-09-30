@@ -49,7 +49,7 @@ Optional options:
 	-j/--jobs  <INT>\t\tMaximum number of parallel jobs (default = ${jobs})
 	-J/--max_assembly_jobs <INT>\tMaximum number of parallel jobs for assembly (default = $max_assembly_jobs)
         -a/--assembler <STRING>\tAssembler to be used (megahit or penguin) (default = ${contig_assembler})
-        -T/--assembler_tmp <STRING>\tAssembler temporary directory (for penguin assembler) (default = ${tmp_penguin})
+        -T/--assembler_tmp <STRING>\tAssembler temporary directory (for penguin assembler) (default = ${assembler_tmp})
 	-o/--output <STRING>\t\tOutput directory to put all the data
 	-L/--alignment_length\t\tMinimal alignment length to link unique sequences to other reference samples.
 	-S/--single_end <STRING> \tAssume single-end reads (e.g. use only Sample1_R1.fq and skip read merging) 
@@ -73,7 +73,7 @@ verbal=true
 bpid=99
 xeno_filename="xenotypic_contigs"
 contig_assembler="megahit"
-tmp_penguin="tmp"
+assembler_tmp="tmp"
 
 command=""
 cmd_args=("$@")
