@@ -80,17 +80,16 @@ else
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Using megahit to assemble reads"
 	        megahit -r $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/megahit.log
 	        success $? "Megahit"
-	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
+	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly (megahit) completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
         elif [[ "$assembler" == "penguin" ]]; then
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Using penguin to assemble reads"
-	        penguin $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/penguin.log
+	        penguin guided_nuclassemble $output/reads/prepped_reads.fastq $output/assembly/final.contigs.fa $assembler_tmp --threads $cores --min-contig-len 75 &> $output/logs/penguin.log
 	        success $? "Penguin"
-	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
+	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly (penguin) completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
         else
-                echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Wrong Assembler (either megahit or penguin);"
+                echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Wrong Assembler (either use megahit or penguin);"
                 exit 1
 fi
-
 
 
 if [ -f $output/assembly/final.contigs.fa.ndb ]; then
