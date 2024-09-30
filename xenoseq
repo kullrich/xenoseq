@@ -14,7 +14,7 @@ PRP='\033[0;35m'	# COSMETIC
 GREY='\033[0;90m'	# CMD message
 NC='\033[0m' # No Color
 
-version="1.2.4"         
+version="1.2.5"         
 
 echo -e "\n${ORANGE} __    __                                                             ";
 echo "/  |  /  |                                                            ";
@@ -98,6 +98,8 @@ while [ $# -gt 0 ]; do
 		assembly_cores=("$2")
 	elif [[ $1 =~ ^(-J|--max_assembly_jobs)$ ]]; then
 		max_assembly_jobs=("$2")
+	elif [[ $1 =~ ^(-a|--assembler)$ ]]; then
+		contig_assembler=("$2")
 	elif [[ $1 =~ ^(-f|--force_relink)$ ]]; then
 		force_relink=true
 	elif [[ $1 =~ ^(-p|--path_to_reads)$ ]]; then
