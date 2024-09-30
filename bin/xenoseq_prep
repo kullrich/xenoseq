@@ -53,7 +53,9 @@ mkdir -p $output/logs
 mkdir -p $output/reads
 mkdir -p $output/read_mapping
 mkdir -p $output/reads/QCreports
-mkdir -p $assembler_tmp
+if [[ "$assembler" == "penguin"]]; then
+        mkdir -p $assembler_tmp
+fi
 filename=$(basename -- "$output")
 filename="${filename%.*}"
 
@@ -79,13 +81,14 @@ else
 	        megahit -r $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/megahit.log
 	        success $? "Megahit"
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
-        else if [[ "$asembler" == "penguin" ]]
+        elif [[ "$assembler" == "penguin" ]]; then
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Using penguin to assemble reads"
-	        penguin $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/megahit.log
+	        penguin $output/reads/prepped_reads.fastq -t $cores --min-contig-len 75 --preset meta-large -o $output/assembly &> $output/logs/penguin.log
 	        success $? "Penguin"
 	        echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly completed; ${BLUE} $output/assembly/final.contigs.fa ${NC}"
         else
-                echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Assembly failed;"
+                echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Wrong Assembler (either megahit or penguin);"
+                exit 1
 fi
 
 
