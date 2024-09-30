@@ -79,6 +79,23 @@ function assemble_mh() {
 	fi
 }
 
+# assembly with penguin
+function assemble_penguin() {
+	reads=$1
+	minlen=$2
+	out=$3
+	if [ -f $out/final.contigs.fa ]; then
+		command=""
+		echo -e "[xenoseq_penguin     $(date +%d-%m_%H:%M:%S)] ${ORANGE}NOTE: no job created, using pre-existing $out/final.contigs.fa${NC}"
+	else
+		rm -rf $out
+		command=" -r $reads $out --threads $cores --min-contig-len $minlen -o "
+		echo -e "[xenoseq_cmd      $(date +%d-%m_%H:%M:%S)] ${GREY}$command${NC}"
+		$command 2>> ${output}/${query_samples[$i]}/logs/megahit.log
+		success $? "Assembly (megahit)"
+	fi
+}
+
 # Make burrows-wheeler index
 function bwa_index()  {
 	if [ -f $1.bwt ]; then
