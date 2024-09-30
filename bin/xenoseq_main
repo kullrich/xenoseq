@@ -35,6 +35,8 @@ blength=300
 verbal=false
 bpid=97
 xeno_filename="xenotypic_contigs"
+assembler="megahit"
+assembler_tmp="tmp"
 
 s="" # query index for find routine
 
@@ -62,6 +64,10 @@ while [ $# -gt 0 ]; do
 		read_suffix=("$2")
 	elif [[ $1 =~ ^(-j|--jobs)$ ]]; then
 		jobs=("$2")
+	elif [[ $1 =~ ^(-a|--assembler)$ ]]; then
+		assembler=("$2")
+	elif [[ $1 =~ ^(-T|--assembler_tmp)$ ]]; then
+		assembler_tmp=("$2")
 	elif [[ $1 =~ ^(-c|--cores)$ ]]; then
 		cores=("$2")
 	elif [[ $1 =~ ^(-L|--alignment_length)$ ]]; then
@@ -94,7 +100,12 @@ mkdir -p $output/${sample}/read_mapping
 mkdir -p $output/${reference_samples[$s]}/source_contigs
 bwa_map $index $reads $out
 unmapped_to_fasta $out.sorted.bam ${reference_samples[$s]}
-assemble_mh $output/${sample}/reads/unique_reads.fasta 300 $output/${sample}/unique_assembly
+if [[ "$assembler" == "megahit" ]]; then
+        assemble_mh $output/${sample}/reads/unique_reads.fasta 300 $output/${sample}/unique_assembly
+elif [[ "$assembler" == "penguin" ]]; then
+        mkdir -i $assembler_tmp/
+        assemble_penguin $output/${sample}/reads/unique_reads.fasta $output/${sample}/unique_assembly $assembler_tmp 300 
+fi
 seqkit sort -l -r $output/${sample}/unique_assembly/final.contigs.fa > $output/${sample}/unique_contigs.fasta 2> $output/logs/seqkit.log
 success $? "Sorting unique contigs (seqkit)"
 
