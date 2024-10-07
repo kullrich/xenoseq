@@ -67,6 +67,7 @@ single=false
 force_relink=false
 metadata=""
 jobs=4
+max_assembly_jobs=2
 cores=4
 blength=300
 verbal=true
