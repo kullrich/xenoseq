@@ -125,6 +125,17 @@ while [ $# -gt 0 ]; do
 done
 
 ############
+###### Check contig assembler ######
+############
+echo -e "[xenoseq_main     $(date +%d-%m_%H:%M:%S)] ${BLUE}STEP 1) CHECK ASSEMBLER${NC}"
+
+if [[ "$contig_assembler" != "megahit" && "$contig_assembler" != "penguin" ]]; then
+    echo "Error: assembler must be either 'megahit' or 'penguin'.\n\n"
+    print_usage
+    exit 1
+fi
+
+############
 ###### Parsing meta data ######
 ############
 echo -e "[xenoseq_main     $(date +%d-%m_%H:%M:%S)] ${BLUE}STEP 1) PARSING METADATA${NC}"
