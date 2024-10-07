@@ -89,6 +89,8 @@ else
         else
                 echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Wrong Assembler (either use megahit or penguin);"
                 exit 1
+        fi
+        
 fi
 
 
