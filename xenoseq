@@ -48,7 +48,7 @@ Optional options:
 	-C/--assembly_cores <INT>\tNumber of CPUs to use for assembly (megahit) (default = ${cores})
 	-j/--jobs  <INT>\t\tMaximum number of parallel jobs (default = ${jobs})
 	-J/--max_assembly_jobs <INT>\tMaximum number of parallel jobs for assembly (default = $max_assembly_jobs)
-        -a/--assembler <STRING>\tAssembler to be used (megahit or penguin) (default = ${contig_assembler})
+        -a/--assembler <STRING>\t\tAssembler to be used (megahit or penguin) (default = ${contig_assembler})
         -T/--assembler_tmp <STRING>\tAssembler temporary directory (for penguin assembler) (default = ${assembler_tmp})
 	-o/--output <STRING>\t\tOutput directory to put all the data
 	-L/--alignment_length\t\tMinimal alignment length to link unique sequences to other reference samples.
