@@ -53,7 +53,7 @@ mkdir -p $output/logs
 mkdir -p $output/reads
 mkdir -p $output/read_mapping
 mkdir -p $output/reads/QCreports
-if [[ "$assembler" == "penguin"]]; then
+if [[ "$assembler" == "penguin" ]]; then
         mkdir -p $assembler_tmp
 fi
 filename=$(basename -- "$output")
