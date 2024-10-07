@@ -44,8 +44,8 @@ Optional options:
 	-r/--read_suffix <STRING> \tRead suffix corresponding to metadata n ames (e.g. when read filenames are Sample1_R1.fq and Sample1_R2.fq, use _R*.fq) (default = ${read_suffix})
 	-l/--link\t\t\tAfter detecting unique contigs, attempt to link them to other reference samples.
 	-t/--trace\t\t\tAfter detecting xenotypic contigs, trace them across all samples.
-	-c/--cores <INT>\tNumber of CPUs to use for smaller tasks (passed on to bwa, samtools, etc.) (default = ${cores})
-	-C/--assembly_cores <INT>\t\tNumber of CPUs to use for assembly (megahit) (default = ${cores})
+	-c/--cores <INT>\t\tNumber of CPUs to use for smaller tasks (passed on to bwa, samtools, etc.) (default = ${cores})
+	-C/--assembly_cores <INT>\tNumber of CPUs to use for assembly (megahit) (default = ${cores})
 	-j/--jobs  <INT>\t\tMaximum number of parallel jobs (default = ${jobs})
 	-J/--max_assembly_jobs <INT>\tMaximum number of parallel jobs for assembly (default = $max_assembly_jobs)
         -a/--assembler <STRING>\tAssembler to be used (megahit or penguin) (default = ${contig_assembler})
