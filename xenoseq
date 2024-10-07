@@ -206,7 +206,7 @@ for (( i=0; i<${#reference_samples[@]}; i++ )); do
 	mkdir -p $output/${reference_samples[$i]}/read_mapping
 	mkdir -p $output/${reference_samples[$i]}/logs
 
-	prep_jobs+="bash ${SCRIPT_PATH}/bin/xenoseq_prep -r1 $r1 $r2 -c $cores -o $output/${reference_samples[$i]} \n"	
+	prep_jobs+="bash ${SCRIPT_PATH}/bin/xenoseq_prep -r1 $r1 $r2 -c $cores -o $output/${reference_samples[$i]} -a ${contig_assembler} -T ${assembler_tmp} \n"	
 done
 
 for (( i=0; i<${#query_samples[@]}; i++ )); do
@@ -222,7 +222,7 @@ for (( i=0; i<${#query_samples[@]}; i++ )); do
 	mkdir -p $output/${query_samples[$i]}/read_mapping
 	mkdir -p $output/${query_samples[$i]}/logs
 
-	prep_jobs+="bash ${SCRIPT_PATH}/bin/xenoseq_prep -r1 $r1 $r2 -c $cores -o $output/${query_samples[$i]} \n"
+	prep_jobs+="bash ${SCRIPT_PATH}/bin/xenoseq_prep -r1 $r1 $r2 -c $cores -o $output/${query_samples[$i]} -a ${contig_assembler} -T ${assembler_tmp} \n"
 done
 
 echo -e "[xenoseq_prep     $(date +%d-%m_%H:%M:%S)] Running all preparation jobs in parallel ($jobs jobs at a time)" 
