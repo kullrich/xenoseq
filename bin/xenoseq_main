@@ -103,7 +103,8 @@ unmapped_to_fasta $out.sorted.bam ${reference_samples[$s]}
 if [[ "$assembler" == "megahit" ]]; then
         assemble_mh $output/${sample}/reads/unique_reads.fasta 300 $output/${sample}/unique_assembly
 elif [[ "$assembler" == "penguin" ]]; then
-        mkdir -i $assembler_tmp/
+        mkdir -p $assembler_tmp/
+        mkdir -p $assembler_tmp/$output/${sample}/unique_assembly
         assemble_penguin $output/${sample}/reads/unique_reads.fasta $output/${sample}/unique_assembly $300 $assembler_tmp
 fi
 seqkit sort -l -r $output/${sample}/unique_assembly/final.contigs.fa > $output/${sample}/unique_contigs.fasta 2> $output/logs/seqkit.log
