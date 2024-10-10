@@ -202,7 +202,9 @@ for (( i=0; i<${#reference_samples[@]}; i++ )); do
 		r2="-r2 "
 		r2+="$(ls ${path_to_reads}/${reference_samples[$i]}${read_suffix} | tail -n 1)" 
 	fi
-        mkdir -p $output/${reference_samples[$i]}/assembly
+        if [[ $contig_assembler == "penguin" ]]; then
+                mkdir -p $output/${reference_samples[$i]}/assembly
+        fi
 	mkdir -p $output/${reference_samples[$i]}/reads
 	mkdir -p $output/${reference_samples[$i]}/read_mapping
 	mkdir -p $output/${reference_samples[$i]}/logs
@@ -219,7 +221,9 @@ for (( i=0; i<${#query_samples[@]}; i++ )); do
 		r2="-r2 "
 		r2+="$(ls ${path_to_reads}/${query_samples[$i]}${read_suffix} | tail -n 1)" 
 	fi
-        mkdir -p $output/${query_samples[$i]}/assembly
+        if [[ $contig_assembler == "penguin" ]]; then
+                mkdir -p $output/${query_samples[$i]}/assembly
+        fi
 	mkdir -p $output/${query_samples[$i]}/reads
 	mkdir -p $output/${query_samples[$i]}/read_mapping
 	mkdir -p $output/${query_samples[$i]}/logs
